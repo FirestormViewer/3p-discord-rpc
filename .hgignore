@@ -1,0 +1,4 @@
+syntax: glob
+build/
+discord-rpc-3.4.0/thirdparty/
+stage/
