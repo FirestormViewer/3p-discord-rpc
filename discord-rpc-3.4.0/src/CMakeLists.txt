@@ -6,6 +6,8 @@ option(WARNINGS_AS_ERRORS "When enabled, compiles with `-Werror` (on *nix platfo
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 set(BASE_RPC_SRC
     ${PROJECT_SOURCE_DIR}/include/discord_rpc.h
     discord_rpc.cpp
