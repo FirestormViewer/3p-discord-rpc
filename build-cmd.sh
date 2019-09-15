@@ -39,29 +39,14 @@ pushd "$build"
         windows*)
             load_vsvars
 
-            case "$AUTOBUILD_VSVER" in
-                "120")
-                    solver="2013"
-                    ;;
-                *)
-                    echo "Unknown AUTOBUILD_VSVER = '$AUTOBUILD_VSVER'" 1>&2 ; exit 1
-                    ;;
-            esac
-
             abspath="$(cygpath -aw $(pwd))" # Current absolute path in Windows format
 			
 			rm -rf *
 			
 			mkdir -p "$stage/lib/release"
-			cmake $abspath/../$DISCORD_SOURCE_DIR -G "Visual Studio 12 2013"
+			cmake $abspath/../$DISCORD_SOURCE_DIR -G "${AUTOBUILD_WIN_CMAKE_GEN}"
 			cmake --build . --config Release
 			cp -a "src/Release/discord-rpc.lib" "$stage/lib/release/discord-rpc.lib"
-			
-			rm -rf *
-			
-			cmake $abspath/../$DISCORD_SOURCE_DIR -G "Visual Studio 12 2013 Win64"
-			cmake --build . --config Release
-			cp -a "src/Release/discord-rpc.lib" "$stage/lib/release/discord-rpc_x64.lib"
         ;;
 
         darwin64)
