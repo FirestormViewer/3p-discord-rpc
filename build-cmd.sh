@@ -52,7 +52,9 @@ pushd "$build"
         darwin64)
 			rm -rf *
 			mkdir -p "$stage/lib/release"
-			cmake $top/$DISCORD_SOURCE_DIR
+			cmake "-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64" \
+				  "-DCMAKE_OSX_DEPLOYMENT_TARGET=11.0" \
+				  $top/$DISCORD_SOURCE_DIR
 			cmake --build . --config Release
 			cp -a "src/libdiscord-rpc.a" "$stage/lib/release/libdiscord-rpc.a"
         ;;
